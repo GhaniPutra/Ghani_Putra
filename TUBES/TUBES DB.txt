@@ -1,0 +1,31 @@
+-- Membuat database
+CREATE DATABASE perpus;
+
+-- Menggunakan database yang baru dibuat
+USE perpus;
+
+-- Membuat tabel buku
+CREATE TABLE buku (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    judul_buku VARCHAR(255) NOT NULL,
+    pengarang VARCHAR(255) NOT NULL,
+    stok INT NOT NULL
+);
+
+-- Membuat tabel user
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama_user VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Membuat tabel peminjaman
+CREATE TABLE peminjaman (
+    id_user INT NOT NULL,
+    id_buku INT NOT NULL,
+    nama_user VARCHAR(255) NOT NULL,
+    judul_buku VARCHAR(255) NOT NULL,
+    tgl_pinjam DATE NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_buku) REFERENCES buku(id) ON DELETE CASCADE,
+    PRIMARY KEY (id_user, id_buku)
+);
